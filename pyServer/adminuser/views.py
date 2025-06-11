@@ -15,7 +15,7 @@ def adminuserSubmain(request):
 #관리자 목록 조회
 @api_view(['POST'])
 def adminuserList(request):
-
+    
     try:
         requestData = json.loads(request.body)
 
@@ -24,7 +24,7 @@ def adminuserList(request):
         if not pageNo:
             pageNo = 1
 
-        print("pageNo: " + str(pageNo))
+        print("pageNo: %s" % str(pageNo))
 
         result = AdminUser.objects.all()
         pages = Paginator(result, 10)
