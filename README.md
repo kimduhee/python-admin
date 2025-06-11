@@ -15,7 +15,7 @@
 ### 마이그레이션을 생성
 > python manage.py makemigrations [app명]
 
-### 마이그레이션을 적용(DB 적용용)
+### 마이그레이션을 적용(DB 적용)
 > python manage.py migrate
 
 ### 데이터베이스 테이블을 Django 모델 코드로 변환
