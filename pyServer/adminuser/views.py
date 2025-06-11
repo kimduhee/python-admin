@@ -1,18 +1,22 @@
+from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from django.core import serializers
 from django.shortcuts import HttpResponse, render
 from django.core.paginator import Paginator
 from .models import AdminUser
+from pyServer.common.responseUtil import commHttpResponse
 import json
 
 #관리자 관리 서브메인
+@api_view(['GET'])
 def adminuserSubmain(request):
     return render(request, "manage/adminuser/adminuser_submain.html")
 
 #관리자 목록 조회
+@api_view(['POST'])
 def adminuserList(request):
-    if request.method == 'POST':
 
+    try:
         requestData = json.loads(request.body)
 
         #페이지 번호
@@ -29,8 +33,8 @@ def adminuserList(request):
         resultList = serializers.serialize('json', page)
         resultJson = json.loads(resultList)
 
-        context = {
-            "data": resultJson,
+        result = {
+            "adminList": resultJson,
             "has_next": page.has_next(),
             "has_previous": page.has_previous(),
             "next_page_number": page.next_page_number() if page.has_next() else None,
@@ -38,4 +42,6 @@ def adminuserList(request):
             "num_pages": pages.num_pages
         }
 
-        return JsonResponse(context, status=200, safe=False)
+        return commHttpResponse(200, result)
+    except:
+        return commHttpResponse(500)

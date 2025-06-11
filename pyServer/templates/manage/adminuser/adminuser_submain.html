@@ -349,7 +349,7 @@
 
     const listRendering = (data) => {
       let adminListHtml = "";
-      $.each(data.data, function(index, item) {
+      $.each(data.data.adminList, function(index, item) {
         adminListHtml += "<tr>";
         adminListHtml += "  <td>" + item.fields.admin_id +"</td>";
         adminListHtml += "  <td>" + item.fields.admin_id +"</td>";
